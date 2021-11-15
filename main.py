@@ -86,6 +86,13 @@ class Cookie:
 
 def draw_menu():
     screen.blit(pygame.image.load('backimage.jpg'), [0, 0])
+    font_30 = pygame.font.SysFont("나눔스퀘어", 30, True, False)
+    font_50 = pygame.font.SysFont("나눔스퀘어", 50, True, False)
+    text_score = font_30.render("Score: " + str(score), True, BLACK)
+    screen.blit(text_score, [350, 60])
+    text_title = font_50.render("Cookie's dream on Halloween", True, WHITE)
+    screen.blit(text_title, [120, 200])
+    pygame.display.flip()
 
 def draw_score():
     font_30 = pygame.font.SysFont("FixedSys", 30, True, False)
