@@ -44,3 +44,39 @@ class Pumkin:
             return True
         else:
             return False
+
+#캐릭터 쿠키 클래스
+class Cookie:
+    image_cookie = ['cookie.png']
+
+    def __init__(self, x=0, y=0, dx=0, dy=0):
+        self.image = ""
+        self.x = x
+        self.y = y
+        self.dx = dx
+        self.dy = dy
+
+    def load_image(self):
+        self.image = pygame.image.load(random.choice(self.image_cookie))
+        self.width = self.image.get_rect().size[0]
+        self.height = self.image.get_rect().size[1]
+
+    def draw_image(self):
+        screen.blit(self.image, [self.x, self.y])
+
+    def move_x(self):
+        self.x += self.dx
+
+    def move_y(self):
+        self.y += self.dy
+
+    def check_screen_out(self):
+        if self.y + self.height > win_h or self.y < 0:
+            self.y -= self.dy
+
+    def check_crash(self, cookie):
+        if (self.x + self.width > cookie.x) and (self.x < cookie.x + cookie.width) and (
+                self.y < cookie.y + cookie.height) and (self.y + self.height > cookie.y):
+            return True
+        else:
+            return False
