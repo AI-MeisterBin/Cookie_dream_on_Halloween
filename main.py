@@ -1,7 +1,46 @@
 import pygame
 
+#창 크기
 win_w = 800
 win_h = 480
 
+#색 정의
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+
+#몬스터인 호박 클래스
+class Pumkin:
+    image_pum = ['pum1.png', 'pum2.png', 'pum3.png', 'pum4.png', 'pum5.png', 'pum6.png', 'pum7.png', 'pum8.png',
+                 'pum9.png', 'pum10.png']
+
+    def __init__(self, x=0, y=0, dx=0, dy=0):
+        self.image = ""
+        self.x = x
+        self.y = y
+        self.dx = dx
+        self.dy = dy
+
+    def load_image(self):
+        self.image = pygame.image.load(random.choice(self.image_pum))
+        self.width = self.image.get_rect().size[0]
+        self.height = self.image.get_rect().size[1]
+
+    def draw_image(self):
+        screen.blit(self.image, [self.x, self.y])
+
+    def move_x(self):
+        self.x += self.dx
+
+    def move_y(self):
+        self.y += self.dy
+
+    def check_screen_out(self):
+        if self.y + self.height > win_h or self.y < 0:
+            self.y -= self.dy
+
+    def check_crash(self, pum):
+        if (self.x + self.width > pum.x) and (self.x < pum.x + pum.width) and (self.y < pum.y + pum.height) and (
+                self.y + self.height > pum.y):
+            return True
+        else:
+            return False
