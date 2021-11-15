@@ -111,4 +111,12 @@ if __name__ == '__main__':
         y = random.randrange(0, win_h - 55)
         pum = Pumkin(x, y, random.randint(5, 10), 0)
         pum.load_image()
-        pums.append(pum)
+        pums.append(pum)                                                   #pum이라는 배열에 추가
+
+    #점수, 게임실행 코드
+    score = 0
+    game_on = True
+    while game_on:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                game_on = False
