@@ -89,3 +89,15 @@ def draw_score():
     font_30 = pygame.font.SysFont("FixedSys", 30, True, False)
     text_score = font_30.render("Score: " + str(score), True, BLACK)
     screen.blit(text_score, [15, 15])
+
+if __name__ == '__main__':
+    pygame.init()
+    screen = pygame.display.set_mode((win_w, win_h))
+    pygame.display.set_caption("Cookie's dream on Halloween")
+    clock = pygame.time.Clock()
+
+    bgm = pygame.mixer.Sound('bgm.wav')
+    bgm.play(-1)
+
+    player = Cookie((win_w - 200), (win_h / 2), 0, 0)
+    player.load_image()
