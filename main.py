@@ -80,3 +80,12 @@ class Cookie:
             return True
         else:
             return False
+
+
+def draw_menu():
+    screen.blit(pygame.image.load('backimage.jpg'), [0, 0])
+
+def draw_score():
+    font_30 = pygame.font.SysFont("FixedSys", 30, True, False)
+    text_score = font_30.render("Score: " + str(score), True, BLACK)
+    screen.blit(text_score, [15, 15])
