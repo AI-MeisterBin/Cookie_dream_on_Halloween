@@ -12,8 +12,7 @@ WHITE = (255, 255, 255)
 
 #몬스터인 호박 클래스
 class Pumkin:
-    image_pum = ['pum1.png', 'pum2.png', 'pum3.png', 'pum4.png', 'pum5.png', 'pum6.png', 'pum7.png', 'pum8.png',
-                 'pum9.png', 'pum10.png']
+    image_pum = ['pum1.png', 'pum2.png', 'pum3.png', 'pum6.png', 'pum7.png', 'pum9.png', 'pum10.png']
 
     def __init__(self, x=0, y=0, dx=0, dy=0):
         self.image = ""
@@ -75,6 +74,8 @@ class Cookie:
     def check_screen_out(self):
         if self.y + self.height > win_h or self.y < 0:
             self.y -= self.dy
+        if self.x + self.height > win_w or self.x < 0:
+            self.x -= self.dx
 
     def check_crash(self, cookie):
         if (self.x + self.width > cookie.x) and (self.x < cookie.x + cookie.width) and (
@@ -169,8 +170,9 @@ if __name__ == '__main__':
 
         screen.blit(pygame.image.load('backimage2.jpeg'), [0, 0])
 
+        #crash가 아닐때 즉 게임 플레이중일때
         if not crash:
-            player.draw_image()
+            player.draw_image()                                              #설정된 속도로 플레이어와 호박이 움직임
             player.move_x()
             player.move_y()
             player.check_screen_out()
@@ -178,13 +180,14 @@ if __name__ == '__main__':
             for i in range(pum_count):
                 pums[i].draw_image()
                 pums[i].x += pums[i].dx
+                #화면 끝에 다다르면 10점 추가 후 사라지고 다시 몬스터 호박 생성
                 if pums[i].x > win_w:
                     score += 10
                     pums[i].x = random.randrange(-150, -50)
                     pums[i].y = random.randrange(0, win_h - pums[i].height)
                     pums[i].dx = random.randint(5, 10)
                     pums[i].load_image()
-
+            #플레이와 닿으면 crash를 True로 만들어 게임 중지
             for i in range(pum_count):
                 if player.check_crash(pums[i]):
                     crash = True
