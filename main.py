@@ -107,7 +107,7 @@ if __name__ == '__main__':
 
     bgm = pygame.mixer.Sound('bgm.wav')                                    #배경음악설정
     bgm.play(-1)                                                           #무한재생
-    sound_crash = pygame.mixer.Sound(crash.wav)
+    sound_crash = pygame.mixer.Sound('crash.wav')
 
     player = Cookie((win_w - 200), (win_h / 2), 0, 0)                      #플레이어의 위치 설정
     player.load_image()                                                    #플레이어 배치
@@ -200,4 +200,4 @@ if __name__ == '__main__':
 
         clock.tick(60)
 
-        pygame.quit()
+    pygame.quit()
