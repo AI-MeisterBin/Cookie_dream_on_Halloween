@@ -1,5 +1,6 @@
 import pygame
 import random
+from time import sleep
 
 #창 크기
 win_w = 800
@@ -99,6 +100,7 @@ if __name__ == '__main__':
 
     bgm = pygame.mixer.Sound('bgm.wav')                                    #배경음악설정
     bgm.play(-1)                                                           #무한재생
+    sound_crash = pygame.mixer.Sound(crash.wav)
 
     player = Cookie((win_w - 200), (win_h / 2), 0, 0)                      #플레이어의 위치 설정
     player.load_image()                                                    #플레이어 배치
@@ -157,3 +159,28 @@ if __name__ == '__main__':
                         player.dx = 0
                     elif event.key == pygame.K_LEFT:
                         player.dx = 0
+
+        screen.blit(pygame.image.load('backimage2.jpeg'), [0, 0])
+
+        if not crash:
+            player.draw_image()
+            player.move_x()
+            player.move_y()
+            player.check_screen_out()
+
+            for i in range(pum_count):
+                pums[i].draw_image()
+                pums[i].x += pums[i].dx
+                if pums[i].x > win_w:
+                    score += 10
+                    pums[i].x = random.randrange(-150, -50)
+                    pums[i].y = random.randrange(0, win_h - pums[i].height)
+                    pums[i].dx = random.randint(5, 10)
+                    pums[i].load_image()
+
+            for i in range(pum_count):
+                if player.check_crash(pums[i]):
+                    crash = True
+                    sound_crash.play()
+                    pygame.mouse.set_visible(True)
+                    break
