@@ -182,5 +182,15 @@ if __name__ == '__main__':
                 if player.check_crash(pums[i]):
                     crash = True
                     sound_crash.play()
+                    sleep(2)
                     pygame.mouse.set_visible(True)
                     break
+            draw_score()
+            pygame.display.flip()
+
+        else:
+            draw_menu()
+
+        clock.tick(60)
+
+        pygame.quit()
