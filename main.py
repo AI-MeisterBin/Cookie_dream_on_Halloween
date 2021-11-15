@@ -1,4 +1,5 @@
 import pygame
+import random
 
 #창 크기
 win_w = 800
@@ -91,13 +92,23 @@ def draw_score():
     screen.blit(text_score, [15, 15])
 
 if __name__ == '__main__':
-    pygame.init()
-    screen = pygame.display.set_mode((win_w, win_h))
-    pygame.display.set_caption("Cookie's dream on Halloween")
+    pygame.init()                                                          #pygame 실행
+    screen = pygame.display.set_mode((win_w, win_h))                       #화면 크기 설정
+    pygame.display.set_caption("Cookie's dream on Halloween")              #이름 설정
     clock = pygame.time.Clock()
 
-    bgm = pygame.mixer.Sound('bgm.wav')
-    bgm.play(-1)
+    bgm = pygame.mixer.Sound('bgm.wav')                                    #배경음악설정
+    bgm.play(-1)                                                           #무한재생
 
-    player = Cookie((win_w - 200), (win_h / 2), 0, 0)
-    player.load_image()
+    player = Cookie((win_w - 200), (win_h / 2), 0, 0)                      #플레이어의 위치 설정
+    player.load_image()                                                    #플레이어 배치
+
+    #몬스터인 호박의 처음 위치와 속도를 설정
+    pums = []
+    pum_count = 5
+    for i in range(pum_count):
+        x = random.randrange(-150, -50)
+        y = random.randrange(0, win_h - 55)
+        pum = Pumkin(x, y, random.randint(5, 10), 0)
+        pum.load_image()
+        pums.append(pum)
