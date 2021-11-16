@@ -12,7 +12,8 @@ WHITE = (255, 255, 255)
 
 #몬스터인 호박 클래스
 class Pumkin:
-    image_pum = ['pum1.png', 'pum2.png', 'pum3.png', 'pum6.png', 'pum7.png', 'pum9.png', 'pum10.png']
+    image_pum = ['pum1.png', 'pum2.png', 'pum3.png', 'pum6.png',
+                 'pum7.png', 'pum9.png', 'pum10.png']
 
     def __init__(self, x=0, y=0, dx=0, dy=0):
         self.image = ""
@@ -35,18 +36,20 @@ class Pumkin:
     def move_y(self):
         self.y += self.dy
 
+    #화면밖으로 나갔는지 체크하는 함수
     def check_screen_out(self):
         if self.y + self.height > win_h or self.y < 0:
             self.y -= self.dy
 
+    #부딪쳤는지 체크하는 함수
     def check_crash(self, pum):
-        if (self.x + self.width > pum.x) and (self.x < pum.x + pum.width) and (self.y < pum.y + pum.height) and (
-                self.y + self.height > pum.y):
+        if (self.x + self.width > pum.x) and (self.x < pum.x + pum.width) \
+                and (self.y < pum.y + pum.height) and (self.y + self.height > pum.y):
             return True
         else:
             return False
 
-#캐릭터 쿠키 클래스
+#캐릭터 쿠키 클래스 위와 구조 동일
 class Cookie:
     image_cookie = ['cookie.png']
 
@@ -96,7 +99,7 @@ def draw_menu():
     pygame.display.flip()
 
 def draw_score():
-    font_30 = pygame.font.SysFont("FixedSys", 30, True, False)
+    font_30 = pygame.font.SysFont("나눔스퀘어", 30, True, False)
     text_score = font_30.render("Score: " + str(score), True, BLACK)
     screen.blit(text_score, [15, 15])
 
